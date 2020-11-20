@@ -45,6 +45,23 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
       delete line_item_url(@line_item)
     end
 
-    assert_redirected_to line_items_url
+    assert_redirected_to store_index_url
+  end
+
+  test "should create line_item via ajax" do
+    assert_difference('LineItem.count') do
+      post line_items_url, params: { product_id: products(:ruby).id },
+           xhr: true
+    end
+    assert_response :success
+    assert_select_jquery :html, '#cart' do
+      assert_select 'tr#current_item td', /Programming Ruby 1.9/
+    end
+  end
+
+  test "should decrease line_item quantity" do
+    put decrease_line_item_url(@line_item)
+    assert_equal(@line_item.quantity, 1)
+    assert_redirected_to store_index_url
   end
 end

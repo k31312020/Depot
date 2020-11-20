@@ -28,6 +28,11 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  # SMTP settings for gmail
+  Depot::Application.configure do
+    config.action_mailer.delivery_method = :test
+  end
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
