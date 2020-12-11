@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.7'
 
 # For Authentication
 gem 'devise'
+gem 'devise-jwt'
+gem 'devise_invitable'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
